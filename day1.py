@@ -1,8 +1,8 @@
+# get input and save to list
 file = open("day1input.txt", "r");
 invAllElves = file.read().split("\n");
 file.close()
 
-#print(invAllElves)
 
 # list to save the total amount of calories by elve
 sumCalByElve = list();
