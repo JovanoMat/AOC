@@ -1,20 +1,29 @@
-import numpy as np
+# regex library for regex opertions
 import re
 
-input = '''    [D]    
-[N] [C]    
-[Z] [M] [P]
- 1   2   3 
 
-move 1 from 2 to 1
-move 3 from 1 to 3
-move 2 from 2 to 1
-move 1 from 1 to 2'''.split("\n")
+# get input from file
+file = open("day5input.txt", "r");
+input = file.read().split("\n");
+file.close()
+
+# create a second list with the input for the second part
+
+
+# input = '''    [D]    
+# [N] [C]    
+# [Z] [M] [P]
+#  1   2   3 
+
+# move 1 from 2 to 1
+# move 3 from 1 to 3
+# move 2 from 2 to 1
+# move 1 from 1 to 2'''.split("\n")
+
 
 
 matrixLen = 0;
 instructions = list();
-
 
 for line in input:
     if line == "":
@@ -42,13 +51,49 @@ for e in range(matrixLen):
     crates.append(list())
 
 
-print(instructions)
-print(crates)
+count = 0;
+for line in input:
+    if count == matrixLen:
+        break
+    else:
+
+        if "    " in line:
+            line = line.replace("    ", " ")
+
+
+        for e in range(matrixLen):
+            lineSplitted = line.split(" ")
+            if lineSplitted[e] == "":
+                continue
+            else:
+                crates[e].insert(0, lineSplitted[e])
+
+        count += 1
 
 
 
+for count, src, des in instructions:
+    # for a in range(count):
+        # crates[des-1].append(crates[src-1][-1])
+        # crates[src-1].pop()
+    
+    for a in range(count):
+        crates[des-1].append(crates[src-1][-count+a])
+        crates[src-1].pop(-count+a)
 
-createStatus = np.matrix(crates);
+    
+
+
+
+top = list();
+for e in range(matrixLen):
+    top.append(crates[e][-1].strip("[").strip("]"))
+
+
+print(f'The top crates when the CrateMover 9001 ist done are: {"".join(top)}!')
+
+
+
 
 
 
