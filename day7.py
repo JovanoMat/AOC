@@ -31,21 +31,28 @@ sizeByDir = list()
 
 dirs = list()
 
+max = 100000;
+
+amountInCurrentDir = 0;
+
+dirHistory = list();
+currentDir = ""; 
+
 for command in commands:
+    commandcount = 0;
     if "cd" in command:
         currentDir = command.split(" ")[2]
+        dirHistory.append(currentDir)
         
         if currentDir == "..":
             
             print("Not implemented")
 
     
-        currentSum = 0
 
     if re.search(r"^\d", command):
-        currentSum += int(command.split(" ")[0])            
-        print(currentSum)            
+        amountInCurrentDir += int(command.split(" ")[0])            
 
-
+    commandcount += 1
 
 
